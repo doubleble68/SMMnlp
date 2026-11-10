@@ -1,0 +1,6 @@
+[
+  {"PatientSSN":"SYN001","NoteDate":"02Apr2020","NoteText":"Synthetic later note"},
+  {"PatientSSN":"SYN001","NoteDate":"01Mar2020","NoteText":"Synthetic earlier note"},
+  {"PatientSSN":"SYN002","NoteDate":"01May2020","NoteText":"Synthetic historical note"},
+  {"PatientSSN":"SYN003","NoteDate":"01Jun2020","NoteText":"Synthetic negative note"}
+]
