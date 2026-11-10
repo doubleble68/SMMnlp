@@ -1,0 +1,61 @@
+
+Your task is to extract the original smoldering multiple myeloma (SMM) diagnosis date from the provided clinical note, as well as determine if the note requires manual human review.
+
+### EXTRACTION RULES:
+1. SMM Diagnosis Date: 
+Do not infer the SMM diagnosis date from dates associated only with MGUS, multiple myeloma, plasma cell dyscrasia/neoplasm or monoclonal gammopathy.
+A laboratory (SPEP, UPEP, FLC, M-spike, bone marrow biopsy, BMBx, monoclonal paraprotein) date can only be used if the note explicitly states that the SMM diagnosis was made, confirmed, showed, consistent with, or established on the basis of that test.
+If the note contains multiple dates, choose the date that is most clearly associated with the original SMM diagnosis. If there is a historical/original diagnosis date and a later follow-up or reassessment date, output the historical/original diagnosis date.
+If only day and month are stated, infer the year using nearby context.
+
+Return only one value:
+- If the full diagnosis date is stated, output in MM/DD/YYYY format
+- If only day and month are stated, infer the 4-digit year using nearby context and output in MM/DD/YYYY format
+- If only month and year are stated, output in MM/YYYY format
+- If only year is stated, output in 4-digit YYYY format
+- If no original SMM diagnosis date is explicitly stated, output: unknown
+
+2. Human Review Flag:
+Return "no" ONLY when the note contains an explicit, unambiguous statement of the date when SMM was diagnosed. Examples of acceptable, explicit phrasing include (but are not limited to):
+- "Diagnosed with smoldering multiple myeloma in 8/2009"
+- "Dx: smoldering multiple myeloma. Dx date: 8/2009"
+- "Diagnosed with SMM via BM plasma cell results in 2/2012"
+- "Patient has smoldering myeloma since 2012"
+
+If the phrasing is less explicit than these examples, requires you to infer the diagnosis date solely from lab or biopsy dates, contains conflicting dates, or if the date is entirely missing, you must return "yes".
+
+### OUTPUT FORMAT
+Return strictly the following two lines of structured output:
+SMM_diagnosis_date: [MM/DD/YYYY, MM/YYYY, YYYY, or unknown]
+human_review_needed: [yes or no]
+Do not include explanations, labels, punctuation, quotes, or additional text.
+
+### EXAMPLES
+Input: Diagnosis: MGUS (IgG kappa), now smoldering with BMBx on 02/14/21 showing 35% plasma cells, and t(11:14). Date of dx: 03/12
+Output: SMM_diagnosis_date: 03/12/2021
+human_review_needed: no
+
+Input: Primary Diagnosis: smoldering MM. Date of Diagnosis: April 25, 2018 … He initially prsented for MGUS in 04/18. SPEP showed M protein of 2.8 with nl FLCR, elevated IgG.
+Output: SMM_diagnosis_date: 4/25/2018
+human_review_needed: no
+
+Input: The findings are consistent with a plasma cell neoplasm with approximately 10-15% kappa restricted plasma cells. The case was discussed the VA hematopathology conference on Monday May 13, 2019.
+Output: SMM_diagnosis_date: unknown
+human_review_needed: yes
+
+Input: S:57 year old male with IgG kappa smoldering myeloma, normal b-2-micro, and albumin. Marrow in 8/05 showed 6% plasma cells on aspirate more patchy involvement on biopsy.
+Output: SMM_diagnosis_date: unknown
+human_review_needed: yes
+
+Input: ASSESSMENT AND PLAN:  A 68-year-old man who was diagnosed with smoldering multiple myeloma IGG lamda in 2003 with 10-20 m% plasma cells in the marrow.
+Output: SMM_diagnosis_date: 2003
+human_review_needed: no
+
+Input: ASSESSMENT/PLAN 1. Multiple Myeloma/amyloid: Has been dx with smouldering/asymptomatic myeloma in 8/09, SPEP generally stable since then.
+Output: SMM_diagnosis_date: 8/2009
+human_review_needed: no
+
+### Clinical note:
+{document}
+
+### Output:

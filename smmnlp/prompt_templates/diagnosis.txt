@@ -1,0 +1,42 @@
+
+Your task is to determine whether the provided clinical note mentions a diagnosis of smoldering multiple myeloma or its synonyms:
+- smouldering multiple myeloma
+- smoldering myeloma
+- smouldering myeloma
+- smoldering MM
+- smouldering MM
+- SMM
+- smoldering IgA kappa myeloma
+- smoldering IgG lambda myeloma
+
+Output "Yes" if the note explicitly mentions that the diagnosis is smoldering multiple myeloma or one of its synonyms.
+
+Output "Yes" if the note explicitly mentions that the patient has/had/with a diagnosis of or is/was diagnosed with smoldering multiple myeloma or one of its synonyms.
+
+Historical SMM diagnosis should still be classified as "Yes" even if the note states that the patient now has symptomatic or active multiple myeloma.
+
+Output "No" if the note only mentions related but different conditions such as MGUS, multiple myeloma, plasma cell dyscrasia, monoclonal gammopathy, amyloidosis, or abnormal SPEP/FLC/bone marrow findings without explicitly mentioning smoldering/smouldering myeloma, smoldering/smouldering multiple myeloma, SMM, or smoldering/smouldering MM
+
+Output "No" if SMM is mentioned only as suspected, being evaluated, being ruled out, not present, denied, absent, uncertain, a differential diagnosis or part of a "versus" statement, such as "SMM versus multiple myeloma".
+
+Do not infer SMM from laboratory values, imaging findings, bone marrow plasma cell percentage, M-protein level, ICD codes, staging, risk stratification, surveillance, or treatment history alone.
+
+### OUTPUT FORMAT
+Provide your response as a single word: Yes or No. Do not include any explanations, introductory text, or punctuation.
+
+### EXAMPLES
+Input: A/P -Plasma cell dyscrasia: He has smoldering/asymptomatic myeloma. No frank evidence of end organ damage.
+Output: Yes
+Input: A/P: Patient is an 80 yo M with numerous cardiac issues and a recently discovered IgG kappa monoclonal gammopathy
+Output: No
+Input: 72 y/o male with a history of smoldering myeloma (now symptomatic multiple myeloma)
+Output: Yes 
+Input: Oncologic history: 68 year old, MALE with smoldering versus Stage I multiple myeloma diagnose via bone marrow biopsy 11/20/2019.
+Output: No
+Input: ASSESSMENT/PLAN: A 75 year old man with IgG kappa monoclonal gammopathy with now increasing anemia. Also HTN, stable CKD. BMBx last month showed 10-20% BM involvement of a kappa restricted plasma cell clone.
+Output: No
+
+### CLINICAL NOTE:
+{document}
+
+### Output:

@@ -1,0 +1,34 @@
+
+Your are given a clinical note that explicitly mentions smoldering multiple myeloma (SMM). Your task is to determine whether the mentioned SMM diagnosis is historical or new.
+
+### ABSTRACTION RULES
+Output "hx" only when the note has the following evidence for historical diagnosis:
+    - SMM listed under medical history, oncology history, problem list, or history of present illness (HPI)
+    - phrases such as "history of SMM", "continues to be/still SMM", "previously SMM", "diagnosed with SMM in", or "had SMM since"
+    - mention of SMM diagnosis followed by a date of diagnosis
+    
+Only mention of patient "with" or being "followed for" SMM does not qualify for a historical diagnosis.
+
+Do not infer historical SMM from labs, imaging, bone marrow findings, M-protein level, or ICD code alone. Base your answer only on explicit textual evidence in the note.
+    
+Output "new" if there is no explicit evidence showing that the diagnosis is historical.
+
+### OUTPUT FORMAT
+Provide your response as a single word: hx or new. Do not include any explanations, introductory text, or punctuation.
+
+### EXAMPLES
+Input: Problems: -"Smoldering Multiple myeloma," IGG kappa with rapidly rising m-spike.
+Output: hx
+Input: DIAGNOSIS: Smoldering Myeloma DATE OF DIAGNOSIS: 8/21/15
+Output: hx
+Input: Bone marrow aspiration and biopsy showed some increase in plasma cells but he continues to be a smoldering myeloma.
+Output: hx 
+Input: 68 y/o male with Smoldering MM, here today for f/u.
+Output: new
+Input: Assessment and plan: 67 year old MALE who presents for follow up of smoldering multiple myeloma.
+Output: new
+
+### CLINICAL NOTE:
+{document}
+
+### Output:
