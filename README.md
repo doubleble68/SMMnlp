@@ -1,6 +1,6 @@
 # SMMnlp
 
-**LLM-based clinical phenotyping and diagnosis date extraction** · Version 2.0.0
+**LLM-based clinical phenotyping and diagnosis date extraction** · Version 1.0.0
 
 A local LLM application for identifying smoldering multiple myeloma (SMM) in
 clinical notes, distinguishing historical and new diagnoses, extracting diagnosis
