@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smmnlp"
+version = "2.0.0"
+description = "Local LLM workflows for SMM diagnosis abstraction and evaluation"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26,<3",
+    "pandas>=2.2,<3",
+    "scikit-learn>=1.5,<2",
+    "openpyxl>=3.1,<4",
+    "xlsxwriter>=3.2,<4",
+]
+
+[project.optional-dependencies]
+inference = ["torch", "transformers", "accelerate", "bitsandbytes", "mistral-common"]
+notebooks = ["jupyterlab", "matplotlib>=3.8,<4"]
+
+[project.scripts]
+smmnlp = "smmnlp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["smmnlp*"]
+
+[tool.setuptools.package-data]
+smmnlp = ["prompt_templates/*.txt"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/**/*.ipynb" = ["E712"]
